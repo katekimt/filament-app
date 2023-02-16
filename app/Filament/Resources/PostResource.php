@@ -7,9 +7,7 @@ use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
 use App\Models\Tag;
 use Closure;
-use Filament\Forms;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -20,8 +18,6 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 use Livewire\TemporaryUploadedFile;
 use Nuhel\FilamentCroppie\Components\Croppie;
@@ -45,7 +41,7 @@ class PostResource extends Resource
                     TextInput::make('slug')->required(),
                     Croppie::make('image')
                         ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
-                            return (string)str($file->hashName());
+                            return (string) str($file->hashName());
                         })->enableDownload()
                         ->enableOpen()
                         ->imageResizeTargetWidth('1000')
